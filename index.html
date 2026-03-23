@@ -57,6 +57,9 @@ function displayProducts(products) {
             <button class="add-cart-btn" onclick="addToCart('${product._id}', '${product.title}', ${product.price})">
                 🛒 Add to Cart
             </button>
+            <div class="cart-container">
+    <span class="cart-icon">🛒</span>
+    <span id="cart-count">0</span> </div>
         </div>
     `).join('');
 }
