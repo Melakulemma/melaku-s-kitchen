@@ -1,0 +1,12 @@
+# Ignore the heavy library folder (Render will install this itself)
+node_modules/
+
+# Ignore local environment secrets
+.env
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore local logs
+npm-debug.log*

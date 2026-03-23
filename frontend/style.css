@@ -1,0 +1,731 @@
+html {
+    scroll-behavior: smooth;
+}
+/* Default Dark Mode Variables */
+:root {
+    --primary: #ffcc00;
+    --bg-color: #0a0a0a;
+    --card-bg: rgba(30, 30, 30, 0.6);
+    --text-color: #ffffff;
+    --glass: rgba(255, 255, 255, 0.05);
+    --border: rgba(255,255,255, 0.1);
+}
+
+/* Light Mode Variables */
+.light-mode {
+    --bg-color: #f5f5f5;
+    --card-bg: #ffffff;
+    --text-color: #1a1a1a;
+    --glass: rgba(0,0,0,0.5);
+    --border: rgba(0, 0, 0, 0.1);
+}
+
+/* Apply variables to the body */
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.4s, color 0.4s; /* Smooth transition */
+}
+
+/* Ensure cards and inputs use variables */
+.recipe-card, .modal-content, #search {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border);
+}
+
+#theme-toggle {
+    cursor: pointer;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    color: var(--primary);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+body {
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Ethiopic', sans-serif;
+    background: radial-gradient(circle at top right, #1a1a1a, var(--bg-dark));
+    color: #efefef;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Floating Navigation Bar */
+header {
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    max-width: 1100px;
+    margin: 0 auto 50px auto;
+    background: var(--glass);
+    backdrop-filter: blur(15px);
+    padding: 15px 30px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 { font-weight: 800; font-size: 1.5rem; color: var(--primary); letter-spacing: -1px; }
+
+/* Modern Cart Bubble */
+#cart-status {
+    background: var(--primary);
+    color: #000;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: 700;
+    box-shadow: 0 10px 20px rgba(255, 204, 0, 0.2);
+}
+/* 1. Make the header a thin strip at the very top */
+header {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    padding: 10px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+header h1 {
+    font-size: 1.2rem; /* Smaller title */
+    margin: 0;
+}
+
+/* 2. Tighten up the Search Section */
+.search-section {
+    padding: 15px 0;
+    background: transparent; /* Remove the giant blur from here */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-container {
+    width: 100%;
+    max-width: 400px; /* Much narrower */
+    margin-bottom: 10px;
+}
+
+#search {
+    padding: 10px 20px; /* Thinner input */
+    font-size: 0.9rem;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px); /* Small blur just for the input */
+    border: 1px solid #444;
+    color: white;
+}
+
+/* 3. Make Filter buttons smaller */
+.filter-container {
+    gap: 8px;
+}
+
+.filter-btn {
+    padding: 5px 15px;
+    font-size: 0.8rem;
+}
+#recipe-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.recipe-card {
+    background: var(--card-bg);
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.recipe-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.recipe-img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.card-content { padding: 25px; }
+
+.price-tag {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--secondary);
+    margin: 10px 0;
+}
+
+.order-btn {
+    width: 100%;
+    background: white;
+    color: black;
+    border: none;
+    padding: 14px;
+    border-radius: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.order-btn:hover {
+    background: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* Category Filter Styling */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    background: transparent;
+    color: #888;
+    border: 1px solid #333;
+    padding: 10px 22px;
+    border-radius: 100px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.filter-btn.active {
+    background: white;
+    color: black;
+    border-color: white;
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* Floating Bottom Cart */
+.glass-cart {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 500px;
+    background: rgba(25, 25, 25, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Animation when items are added */
+.cart-bump {
+    transform: translateX(-50%) scale(1.05);
+    border-color: var(--primary);
+}
+
+.glass-cart, #cart-status {
+    height: auto !important; /* Force it to NOT stretch */
+    max-height: 60px;        /* Strict limit on thickness */
+    padding: 5px 20px;       /* Tighten top/bottom space */
+    align-self: center;      /* Prevent stretching if inside a flex container */
+}
+
+.cart-icon {
+    position: relative;
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: #ff4444;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.cart-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.total-label {
+    font-size: 0.7rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.total-amount {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: white;
+}
+
+.cart-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.icon-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: #888;
+    width: 45px;
+    height: 45px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.icon-btn:hover {
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+}
+
+.checkout-main-btn {
+    background: var(--primary);
+    color: black;
+    border: none;
+    padding: 0 25px;
+    height: 45px;
+    border-radius: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.checkout-main-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 204, 0, 0.3);
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.9); /* Darker overlay */
+    backdrop-filter: blur(10px); /* Modern blur */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* High number to stay on top of the floating cart */
+}
+
+.modal-content {
+    background: #1a1a1a;
+    padding: 40px;
+    border-radius: 30px;
+    border: 1px solid var(--primary);
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+.glass-cart {
+    position: fixed;
+    bottom: 20px; /* Moved closer to the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto; /* Shrinks to fit content */
+    min-width: 320px; 
+    background: rgba(15, 15, 15, 0.95); /* More solid, less transparent */
+    backdrop-filter: blur(5px); /* Reduced from 20px to 5px */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px; /* Slightly less rounded */
+    padding: 10px 20px; /* Slimmer padding */
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Lighter overlay */
+    backdrop-filter: blur(3px); /* Reduced from 10px to 3px */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: #121212; /* Solid background */
+    padding: 25px; /* Compact padding */
+    border-radius: 20px;
+    border: 1px solid #333;
+    width: 85%;
+    max-width: 380px; /* Smaller width */
+}
+/* Footer Styling */
+.main-footer {
+    background: #111;
+    color: #bbb;
+    padding: 60px 5% 20px;
+    margin-top: 100px;
+    border-top: 1px solid #333;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section { flex: 1; min-width: 250px; }
+
+.footer-section h3 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.footer-section p { font-size: 0.9rem; line-height: 1.8; }
+
+.socials a {
+    color: white;
+    font-size: 1.5rem;
+    margin-right: 20px;
+    transition: 0.3s;
+}
+
+.socials a:hover { color: var(--primary); }
+
+.links ul { list-style: none; padding: 0; }
+.links li { margin-bottom: 12px; }
+.links a { color: #888; text-decoration: none; transition: 0.3s; }
+.links a:hover { color: white; padding-left: 5px; }
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #222;
+    font-size: 0.8rem;
+}
+
+/* Info Modal Styling */
+.info-card {
+    max-width: 600px !important;
+    text-align: left;
+    position: relative;
+}
+
+.close-info {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #888;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+    .footer-content { flex-direction: column; text-align: center; }
+    .socials { justify-content: center; display: flex; }
+}
+.skeleton {
+    background: linear-gradient(90deg, #222 25%, #333 50%, #222 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 10px;
+}
+
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+#scrollTop {
+    position: fixed;
+    bottom: 100px; /* Sits above your floating cart */
+    right: 20px;
+    background: var(--primary);
+    color: black;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none; /* Hidden by default, show via JS on scroll */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 99;
+}
+.recipe-card {
+    position: relative;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.recipe-card:hover .card-overlay {
+    opacity: 1;
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+.hero-slider {
+    max-width: 1200px;
+    margin: 20px auto;
+    height: 400px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border);
+}
+
+.hero-slide {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding: 0 5%;
+    gap: 30px;
+}
+
+.hero-text { flex: 1; }
+
+.badge {
+    background: var(--primary);
+    color: black;
+    padding: 5px 12px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.hero-text h2 {
+    font-size: 3rem;
+    margin: 15px 0;
+    color: white;
+}
+
+.hero-text p {
+    color: #888;
+    font-size: 1.1rem;
+    max-width: 400px;
+    margin-bottom: 25px;
+}
+
+.hero-order-btn {
+    background: white;
+    color: black;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.hero-order-btn:hover {
+    background: var(--primary);
+    transform: scale(1.05);
+}
+
+.hero-image-container {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#hero-img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(255, 204, 0, 0.2);
+}
+
+/* Dots for the slider */
+.slider-dots { margin-top: 20px; display: flex; gap: 8px; }
+.dot { width: 8px; height: 8px; background: #333; border-radius: 50%; }
+.dot.active { width: 25px; background: var(--primary); }
+
+@media (max-width: 768px) {
+    .hero-slide { flex-direction: column-reverse; text-align: center; padding: 40px 20px; }
+    .hero-image-container { display: none; }
+    .hero-text h2 { font-size: 2rem; }
+}
+.newsletter-section {
+    background: var(--glass);
+    padding: 60px 5%;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-top: 50px;
+}
+
+.newsletter-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.newsletter-text h2 {
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+#newsletter-form {
+    display: flex;
+    gap: 10px;
+    flex: 1;
+    max-width: 500px;
+}
+
+#news-email {
+    flex: 1;
+    padding: 15px 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    outline: none;
+}
+
+#news-email:focus {
+    border-color: var(--primary);
+}
+
+.subscribe-btn {
+    background: var(--primary);
+    color: black;
+    border: none;
+    padding: 0 30px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.subscribe-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .newsletter-container { text-align: center; justify-content: center; }
+    #newsletter-form { width: 100%; }
+}
+.recipe-card img {
+    transition: transform 0.5s ease;
+}
+
+.recipe-card:hover img {
+    transform: scale(1.1); /* Subtle zoom in */
+}
+
+.recipe-card {
+    overflow: hidden; /* Keeps the zoom inside the card borders */
+}
+::selection {
+    background: var(--primary);
+    color: black;
+}
+.modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Dark background */
+    backdrop-filter: blur(8px);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Higher than everything else */
+}
+
+.modal-content {
+    background: #1a1a1a;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 450px;
+    border: 1px solid var(--primary);
+    color: white;
+}
+
+.summary-list {
+    list-style: none;
+    padding: 20px 0;
+}
+
+.summary-list li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+.recipe-card img {
+    aspect-ratio: 16 / 9;
+    background: #222; /* Shows a dark box while the image is downloading */
+    object-fit: cover;
+    width: 100%;
+}
+/* Make icons golden/yellow so they are visible */
+.fas, .fab {
+    color: var(--primary); 
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+/* Icons inside buttons should be white or black depending on the button */
+button .fas {
+    color: inherit; 
+}
