@@ -1,9 +1,9 @@
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('mongoose'); // Add this if missing
+const mongoose = require('mongoose');
 require('dotenv').config();
 
-const app = express(); // <--- This MUST come before app.use
+const app = express(); // <--- This MUST be here before any app.use
 
 app.use(cors());
 app.use(express.json());
