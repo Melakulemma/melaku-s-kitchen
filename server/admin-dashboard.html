@@ -39,9 +39,7 @@
     </div>
 
     <script>
-        const productForm = document.getElementById('productForm');
-
-productForm.addEventListener('submit', async (e) => {
+       document.getElementById('productForm').onsubmit = async (e) => {
     e.preventDefault();
     
     const payload = {
@@ -52,21 +50,20 @@ productForm.addEventListener('submit', async (e) => {
     };
 
     try {
-        const response = await fetch("https://melaku-e-shopping.onrender.com/api/recipes", {
+        const response = await fetch("https://melaku-s-kitchen.onrender.com/api/recipes", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
 
         if (response.ok) {
-            alert("✅ Product Added to Menu!");
-            productForm.reset();
-            location.reload(); // Refresh to see the new list
+            alert("✅ Food added successfully!");
+            location.reload(); 
         }
     } catch (err) {
-        alert("❌ Error adding product.");
+        alert("❌ Error: Check if your server is running.");
     }
-});
+};
     </script>
 </body>
 </html>

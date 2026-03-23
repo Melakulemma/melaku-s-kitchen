@@ -30,41 +30,31 @@
     </div>
 
     <script>
-        document.getElementById('regForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const status = document.getElementById('status');
-            status.innerText = "Connecting to server...";
-            status.style.color = "#aaa";
+        document.getElementById('regForm').onclick = async (e) => {
+    e.preventDefault();
+    const status = document.getElementById('status') || { innerText: "" };
+    
+    const payload = {
+        username: document.getElementById('user').value,
+        password: document.getElementById('pass').value,
+        role: document.getElementById('role').value
+    };
 
-            const payload = {
-                username: document.getElementById('user').value,
-                password: document.getElementById('pass').value,
-                role: document.getElementById('role').value
-            };
-
-            try {
-                // This connects to your Render backend
-                const response = await fetch("https://melaku-s-kitchen.onrender.com/api/register", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
-                });
-
-                const data = await response.json();
-                
-                if (response.ok) {
-                    status.style.color = "#2ecc71";
-                    status.innerText = "✅ Success! Account Created.";
-                    e.target.reset(); // Clears the form
-                } else {
-                    status.style.color = "#ff4757";
-                    status.innerText = "❌ Error: " + (data.error || "Check your server logs.");
-                }
-            } catch (err) {
-                status.style.color = "#ff4757";
-                status.innerText = "❌ Server is offline. Wake up Render first!";
-            }
+    try {
+        // Double check this URL matches your Render Dashboard!
+        const response = await fetch("https://melaku-s-kitchen.onrender.com/api/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
         });
+
+        const data = await response.json();
+        alert(data.message || data.error);
+    } catch (err) {
+        console.error(err);
+        alert("Could not connect to server. Is Render awake?");
+    }
+};
     </script>
 </body>
 </html>

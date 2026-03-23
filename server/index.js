@@ -63,3 +63,13 @@ app.post('/api/recipes', async (req, res) => {
 });
 
 app.listen(PORT, () => console.log(`🚀 Server on port ${PORT}`));
+// Add this route to server/index.js if it's missing!
+app.post('/api/recipes', async (req, res) => {
+    try {
+        const newRecipe = new Recipe(req.body);
+        await newRecipe.save();
+        res.status(201).json({ message: "Recipe saved to MongoDB!" });
+    } catch (err) {
+        res.status(500).json({ error: "Failed to save recipe" });
+    }
+});
