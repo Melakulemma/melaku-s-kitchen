@@ -40,3 +40,32 @@ document.addEventListener('DOMContentLoaded', fetchRecipes);
 function addToCart(id) {
     alert("Added product " + id + " to cart!");
 }
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function addToCart(id, title, price) {
+    // Check if item is already in cart
+    const existingItem = cart.find(item => item.id === id);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ id, title, price, quantity: 1 });
+    }
+
+    // Save back to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    alert(`${title} added to your kitchen cart!`);
+    updateCartCount(); // Optional: updates a counter in your navbar
+}
+
+function updateCartCount() {
+    const countElement = document.getElementById('cart-count');
+    if (countElement) {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        countElement.innerText = totalItems;
+    }
+}
+
+// Run on page load
+updateCartCount();

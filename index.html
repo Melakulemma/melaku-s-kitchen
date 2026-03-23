@@ -46,6 +46,20 @@
                 document.getElementById('msg').innerText = "Registration failed!";
             }
         });
+        // Inside your loop that creates product cards:
+function displayProducts(products) {
+    const container = document.getElementById('product-container');
+    container.innerHTML = products.map(product => `
+        <div class="product-card">
+            <img src="${product.image}" alt="${product.title}">
+            <h3>${product.title}</h3>
+            <p>${product.price} ETB</p>
+            <button class="add-cart-btn" onclick="addToCart('${product._id}', '${product.title}', ${product.price})">
+                🛒 Add to Cart
+            </button>
+        </div>
+    `).join('');
+}
     </script>
 </body>
 </html>

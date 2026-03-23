@@ -729,3 +729,20 @@ header h1 {
 button .fas {
     color: inherit; 
 }
+.add-cart-btn {
+    background-color: #ff4757; /* Match your theme red */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.add-cart-btn:hover {
+    background-color: #ff6b81;
+    transform: scale(1.02);
+}
