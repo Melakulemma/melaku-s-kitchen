@@ -1,11 +1,13 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
+const mongoose = require('mongoose'); // Add this if missing
 require('dotenv').config();
 
-const app = express();
+const app = express(); // <--- This MUST come before app.use
+
 app.use(cors());
 app.use(express.json());
+// ... rest of your code
 
 // 1. Database Connection
 const URI = process.env.MONGO_URI;
