@@ -1,34 +1,61 @@
-<script>
-    const regForm = document.getElementById('regForm');
-    
-    regForm.onsubmit = async (e) => {
-        e.preventDefault();
-        const status = document.getElementById('status');
-        status.innerText = "Processing...";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registration</title>
+    <style>
+        body { font-family: sans-serif; background: #121212; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: #1e1e1e; padding: 30px; border-radius: 10px; width: 300px; text-align: center; }
+        input, select, button { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: none; }
+        button { background: #ff4757; color: white; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Create Admin</h2>
+        <form id="regForm">
+            <input type="text" id="user" placeholder="Username" required>
+            <input type="password" id="pass" placeholder="Password" required>
+            <select id="role">
+                <option value="admin">Admin</option>
+            </select>
+            <button type="submit">Register</button>
+        </form>
+        <p id="status"></p>
+    </div>
 
-        const payload = {
-            username: document.getElementById('user').value,
-            password: document.getElementById('pass').value,
-            role: document.getElementById('role').value
-        };
+    <script>
+        document.getElementById('regForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const status = document.getElementById('status');
+            status.innerText = "Sending...";
 
-        try {
-            // Update this URL to your NEW Render link
-            const response = await fetch("https://melaku-s-kitchen.onrender.com/api/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
+            const payload = {
+                username: document.getElementById('user').value,
+                password: document.getElementById('pass').value,
+                role: document.getElementById('role').value
+            };
 
-            const data = await response.json();
-            if (response.ok) {
-                alert("✅ Success: " + data.message);
-                window.location.href = "login.html"; // Move to login after success
-            } else {
-                alert("❌ Error: " + data.error);
+            try {
+                // UPDATE THIS URL TO MATCH YOUR RENDER DASHBOARD
+                const response = await fetch("https://melaku-s-kitchen.onrender.com/api/register", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert("✅ Success! You can now login.");
+                    window.location.href = "login.html";
+                } else {
+                    status.innerText = "❌ Error: " + data.error;
+                }
+            } catch (err) {
+                status.innerText = "❌ Could not connect to server.";
             }
-        } catch (err) {
-            alert("❌ Connection failed. Check your internet or Render dashboard.");
-        }
-    };
-</script>
+        };
+    </script>
+</body>
+</html>
