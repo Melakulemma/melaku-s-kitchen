@@ -7,7 +7,7 @@ async function fetchRecipes() {
     recipeList.innerHTML = "<li>Loading delicious food...</li>";
 
     try {
-        const response = await fetch("https://melaku-e-shopping.onrender.com/api/recipes");
+        const response = await fetch("https://melaku-s-kitchen.onrender.com/api/login");
         
         if (!response.ok) throw new Error("Network response was not ok");
         
